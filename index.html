@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Home - My Website</title>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center p-5 bg-gray-800 text-white">
+        <div class="logo">
+            <img src="logo.png" alt="My Logo" class="w-24 h-auto">
+        </div>
+        <ul class="flex space-x-6">
+            <li><a href="index.html" class="hover:bg-gray-700 px-3 py-2 rounded">Home</a></li>
+            <li><a href="products.html" class="hover:bg-gray-700 px-3 py-2 rounded">Products</a></li>
+            <li><a href="about.html" class="hover:bg-gray-700 px-3 py-2 rounded">About Us</a></li>
+            <li><a href="contact.html" class="hover:bg-gray-700 px-3 py-2 rounded">Contact</a></li>
+            <li><a href="faqs.html" class="hover:bg-gray-700 px-3 py-2 rounded">FAQs</a></li>
+            <li><a href="cart.html" class="hover:bg-gray-700 px-3 py-2 rounded">Cart</a></li>
+        </ul>
+    </nav>
+
+   <!-- Slideshow -->
+    <div class="relative w-full h-80 md:h-[500px] lg:h-[700px]">
+        <div id="slideshow" class="absolute inset-0 flex w-full h-full">
+            <img src="placeholder1.webp" alt="Image 1" class="w-full h-full object-contain hidden">
+            <img src="placeholder2.webp" alt="Image 2" class="w-full h-full object-contain hidden">
+            <img src="placeholder3.avif" alt="Image 3" class="w-full h-full object-contain hidden">
+            <img src="placeholder4.webp" alt="Image 1" class="w-full h-full object-contain hidden">
+            <img src="placeholder5.avif" alt="Image 2" class="w-full h-full object-contain hidden">
+            <img src="placeholder6.jpg" alt="Image 3" class="w-full h-full object-contain hidden">
+            <img src="placeholder7.jpeg" alt="Image 1" class="w-full h-full object-contain hidden">
+            <img src="placeholder8.webp" alt="Image 2" class="w-full h-full object-contain hidden">
+            <img src="placeholder9.jpg" alt="Image 3" class="w-full h-full object-contain hidden">
+            <img src="placeholder10.jpg" alt="Image 1" class="w-full h-full object-contain hidden">
+            <img src="placeholder11.jpeg" alt="Image 2" class="w-full h-full object-contain hidden">
+            <img src="placeholder12.jpg" alt="Image 3" class="w-full h-full object-contain hidden">
+            <img src="placeholder13.jpg" alt="Image 2" class="w-full h-full object-contain hidden">
+            <img src="placeholder14.jpg" alt="Image 3" class="w-full h-full object-contain hidden">
+            <img src="placeholder15.jpg" alt="Image 1" class="w-full h-full object-contain hidden">
+            <img src="placeholder11.jpeg" alt="Image 2" class="w-full h-full object-contain hidden">
+            <img src="placeholder1.avif" alt="Image 3" class="w-full h-full object-contain hidden">
+        </div>
+        <!-- Text on Slideshow -->
+        <div class="absolute inset-0 flex items-center justify-center">
+            <h1 class="text-white text-4xl md:text-6xl lg:text-8xl font-bold drop-shadow-lg">Make a statement out of yourself</h1>
+        </div>
+    </div>
+
+    <!-- Section Title -->
+    <div class="text-center mt-12">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800">Explore Our Exclusive Offerings</h2>
+        <p class="text-gray-600 mt-2 text-lg">Designed to captivate and engage your audience</p>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8 mb-12 px-4">
+        <!-- Card 1 -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <img src="card14.webp" alt="Urban Pulse" class="w-full h-40 object-cover">
+            <div class="p-4">
+                <h3 class="text-lg font-semibold mb-3">Urban Pulse</h3>
+                <p class="text-gray-600 mb-3">$59.99</p>
+                <!-- Button for linking to cart.html -->
+                <a href="cart.html">
+                    <button class="w-full bg-cadetgreen-500 text-white py-2 rounded hover:bg-cadetgreen-700">Shop Now</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <img src="card2.avif" alt="StreetLab" class="w-full h-40 object-cover">
+            <div class="p-4">
+                <h3 class="text-lg font-semibold mb-3">StreetLab</h3>
+                <p class="text-gray-600 mb-3">$49.99</p>
+                <!-- Button for linking to cart.html -->
+                <a href="cart.html">
+                    <button class="w-full bg-cadetgreen-500 text-white py-2 rounded hover:bg-cadetgreen-700">Shop Now</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Card 3 (New Card) -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <img src="card3.avif" alt="City Life" class="w-full h-40 object-cover">
+            <div class="p-4">
+                <h3 class="text-lg font-semibold mb-3">City Life</h3>
+                <p class="text-gray-600 mb-3">$69.99</p>
+                <!-- Button for linking to cart.html -->
+                <a href="cart.html">
+                    <button class="w-full bg-cadetgreen-500 text-white py-2 rounded hover:bg-cadetgreen-700">Shop Now</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Card 4 (Another New Card) -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <img src="card14.webp" alt="Tech Style" class="w-full h-40 object-cover">
+            <div class="p-4">
+                <h3 class="text-lg font-semibold mb-3">Tech Style</h3>
+                <p class="text-gray-600 mb-3">$79.99</p>
+                <!-- Button for linking to cart.html -->
+                <a href="cart.html">
+                    <button class="w-full bg-cadetgreen-500 text-white py-2 rounded hover:bg-cadetgreen-700">Shop Now</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Another Section with Bold Text -->
+    <div class="bg-gray-200 py-16">
+        <div class="text-center">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">Urban Threads: Redefining Style for 19-30-Year-Olds</h2>
+            <p class="text-gray-600 text-lg max-w-3xl mx-auto">Step into the world of bold fashion and effortless style. Urban Threads brings you trendsetting collections that blend streetwear vibes with modern elegance. Designed for the 19-30 age group, we empower you to express your individuality with every outfit. Stay ahead of the curve and make a statement with our fresh, versatile looks tailored for your unique personality. Let’s make it happen!</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-4 mt-12">
+        <p>&copy; 2024 My Website. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Slideshow -->
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll("#slideshow img");
+
+        function showNextSlide() {
+            slides[currentIndex].classList.add("hidden");
+            currentIndex = (currentIndex + 1) % slides.length;  // Loop back to the first image
+            slides[currentIndex].classList.remove("hidden");
+        }
+
+        setInterval(showNextSlide, 3000);  // Change image every 3 seconds
+    </script>
+
+</body>
+</html>
