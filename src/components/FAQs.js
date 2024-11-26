@@ -1,42 +1,36 @@
-import React from "react";
+// FAQs.js
+import React from 'react';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
-function FAQs() {
+const faqs = [
+  { question: 'What is the size guide for your clothing?', answer: 'You can find our size guide on each product page.' },
+  { question: 'How can I track my order?', answer: 'Once your order is shipped, we will send you a tracking number.' },
+  { question: 'Do you offer international shipping?', answer: 'Yes, we offer international shipping to most countries.' },
+  { question: 'What payment methods do you accept?', answer: 'We accept all major credit cards, PayPal, and other secure payment methods.' },
+  { question: 'Can I change or cancel my order?', answer: 'Once an order is placed, it is processed quickly. Please contact us immediately if you need to make changes.' },
+  { question: 'How do I return or exchange an item?', answer: 'We offer a 30-day return and exchange policy.' },
+  { question: 'Are your clothes ethically made?', answer: 'Yes, we take sustainability and ethical practices seriously.' }
+];
+
+const FAQs = () => {
   return (
-    <div className="container mx-auto px-6 py-12">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
-        Frequently Asked Questions
-      </h2>
-      <div className="space-y-6">
-        {/* FAQ 1 */}
-        <div>
-          <h3 className="font-semibold text-lg">What is your return policy?</h3>
-          <p className="text-gray-600">
-            You can return items within 30 days of purchase for a full refund.
-          </p>
-        </div>
-        {/* FAQ 2 */}
-        <div>
-          <h3 className="font-semibold text-lg">Do you ship internationally?</h3>
-          <p className="text-gray-600">
-            Yes, we offer international shipping to most countries.
-          </p>
-        </div>
-        {/* FAQ 3 */}
-        <div>
-          <h3 className="font-semibold text-lg">How do I track my order?</h3>
-          <p className="text-gray-600">
-            Once your order has shipped, you will receive a tracking number via
-            email.
-          </p>
-        </div>
-        {/* FAQ 4 */}
-        <div>
-          <h3 className="font-semibold text-lg">Do you offer gift cards?</h3>
-          <p className="text-gray-600">Yes, we offer gift cards for purchase.</p>
+    <div className="bg-gray-100">
+      <Navbar />
+      <div className="container mx-auto px-6 py-12">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Frequently Asked Questions</h1>
+        <div className="space-y-6">
+          {faqs.map((faq, index) => (
+            <div key={index} className="bg-white p-6 shadow-lg rounded-lg">
+              <h3 className="text-xl font-semibold text-gray-800">{faq.question}</h3>
+              <p className="text-gray-600 mt-2">{faq.answer}</p>
+            </div>
+          ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
-}
+};
 
 export default FAQs;
