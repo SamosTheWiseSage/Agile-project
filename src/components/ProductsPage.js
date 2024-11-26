@@ -1,4 +1,6 @@
+// src/components/ProductsPage.js
 import React from 'react';
+import Layout from './Layout';
 
 // Define product data (array of objects)
 const products = [
@@ -78,47 +80,27 @@ const products = [
 
 const ProductsPage = () => {
     return (
-        <div className="bg-gray-100 font-sans">
-
-            {/* Navbar */}
-            <nav className="flex justify-between items-center p-5 bg-gray-800 text-white">
-                <div className="logo">
-                    <img src="logo.png" alt="My Logo" className="w-24 h-auto" />
+      <Layout>
+        <div className="container mx-auto px-6 py-12">
+          <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Our Products</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {products.map((product, index) => (
+              <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold mb-3">{product.name}</h3>
+                  <p className="text-gray-600 mb-3">{product.description}</p>
+                  <p className="text-gray-600 mb-3">{product.price}</p>
+                  <a href="cart.html">
+                    <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700">Shop Now</button>
+                  </a>
                 </div>
-                <ul className="flex space-x-6">
-                    <li><a href="/" className="hover:bg-gray-700 px-3 py-2 rounded">Home</a></li>
-                    <li><a href="/products" className="hover:bg-gray-700 px-3 py-2 rounded">Products</a></li>
-                    <li><a href="/about" className="hover:bg-gray-700 px-3 py-2 rounded">About Us</a></li>
-                    <li><a href="/contact" className="hover:bg-gray-700 px-3 py-2 rounded">Contact</a></li>
-                    <li><a href="/faqs" className="hover:bg-gray-700 px-3 py-2 rounded">FAQs</a></li>
-                    <li><a href="/cart" className="hover:bg-gray-700 px-3 py-2 rounded">Cart</a></li>
-                </ul>
-            </nav>
-
-            {/* 12 Product Cards Section */}
-            <div id="product-cards" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8 mb-12 px-4">
-                {products.map((product, index) => (
-                    <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden">
-                        <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
-                        <div className="p-4">
-                            <h3 className="text-lg font-semibold mb-3">{product.name}</h3>
-                            <p className="text-gray-600 mb-3">{product.description}</p>
-                            <p className="text-gray-600 mb-3">{product.price}</p>
-                            <a href="cart.html">
-                                <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700">Shop Now</button>
-                            </a>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            {/* Footer */}
-            <footer className="bg-gray-800 text-white text-center py-4 mt-12">
-                <p>&copy; 2024 My Website. All rights reserved.</p>
-            </footer>
-
+              </div>
+            ))}
+          </div>
         </div>
+      </Layout>
     );
-};
-
-export default ProductsPage;
+  };
+  
+  export default ProductsPage;

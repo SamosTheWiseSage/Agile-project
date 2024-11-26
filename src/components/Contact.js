@@ -1,7 +1,6 @@
-// Contact.js
+// src/components/Contact.js
 import React from 'react';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Layout from './Layout';
 
 const Contact = () => {
   const teamMembers = [
@@ -12,10 +11,8 @@ const Contact = () => {
     { name: 'Member 5', email: 'member5@example.com', phone: '+123 456 7894', availability: '7:00 AM - 3:00 PM', bgColor: 'bg-purple-500' }
   ];
 
-  // Test för att se om det funkar (Erik)
   return (
-    <div className="bg-gray-100">
-      <Navbar />
+    <Layout>
       <div className="container mx-auto px-6 py-12">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Contact Us</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -29,8 +26,7 @@ const Contact = () => {
           ))}
         </div>
       </div>
-      <Footer />
-    </div>
+    </Layout>
   );
 };
 

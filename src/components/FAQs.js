@@ -1,7 +1,6 @@
-// FAQs.js
+// src/components/FAQs.js
 import React from 'react';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Layout from './Layout';
 
 const faqs = [
   { question: 'What is the size guide for your clothing?', answer: 'You can find our size guide on each product page.' },
@@ -15,8 +14,7 @@ const faqs = [
 
 const FAQs = () => {
   return (
-    <div className="bg-gray-100">
-      <Navbar />
+    <Layout>
       <div className="container mx-auto px-6 py-12">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Frequently Asked Questions</h1>
         <div className="space-y-6">
@@ -28,8 +26,7 @@ const FAQs = () => {
           ))}
         </div>
       </div>
-      <Footer />
-    </div>
+    </Layout>
   );
 };
 
