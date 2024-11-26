@@ -12,6 +12,7 @@ const Contact = () => {
     { name: 'Member 5', email: 'member5@example.com', phone: '+123 456 7894', availability: '7:00 AM - 3:00 PM', bgColor: 'bg-purple-500' }
   ];
 
+  // Test för att se om det funkar (Erik)
   return (
     <div className="bg-gray-100">
       <Navbar />
