@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // DRRFEOFEJOFAKFPKEPFK
 import Layout from './Layout'; // Import the Layout component
 
 const About = () => {
