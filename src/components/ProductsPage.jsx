@@ -1,57 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 import Navbar from './Navbar';
-
-// Uppdaterad produktdata med kategorier och underkategorier
-const products = [
-  {
-    name: 'Urban Pulse',
-    description: 'Stylish urban wear to elevate your street look!',
-    price: 'SEK 599.99',
-    image: 'card11.jfif',
-    category: 'Tröjor', // Kategori
-    subcategory: 'Sweatshirt', // Underkategori
-  },
-  {
-    name: 'StreetLab',
-    description: 'Perfect for the modern, street-savvy fashionista.',
-    price: 'SEK 499.99',
-    image: 'card12.jpg',
-    category: 'Byxor',
-    subcategory: 'Jeans', // Underkategori
-  },
-  {
-    name: 'Vibe Theory',
-    description: 'Dive into the vibes of your true self with unique designs.',
-    price: 'SEK 499.00',
-    image: 'card13.jpg',
-    category: 'Skor',
-    subcategory: 'Sneakers', // Underkategori
-  },
-  {
-    name: 'Babatunde',
-    description: 'Dive into the vibes of your true self with unique designs.',
-    price: 'SEK 699.00',
-    image: 'card13.jpg',
-    category: 'Jackor',
-    subcategory: 'Bomber Jacket', // Underkategori
-  },
-];
-
-// Kategorier och underkategorier
-const categories = {
-  'Tröjor': ['Sweatshirt', 'T-shirt', 'Hoodie'],
-  'Byxor': ['Jeans', 'Sweatpants', 'Shorts'],
-  'Skor': ['Sneakers', 'Boots', 'Sandals'],
-  'Jackor': ['Bomber Jacket', 'Blazer', 'Parka'],
-};
+import { getProducts } from '../data/mockDatabase'; // Import the DB function
 
 const ProductsPage = () => {
+  const [products, setProducts] = useState(getProducts());
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Filtrera produkter baserat på kategori och underkategori
+  // Use useEffect to re-fetch products when the component mounts or when products are updated
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProducts(getProducts()); // Refresh the products list from the mock DB
+    }, 5000); // Poll for updates every 5 seconds (or adjust as needed)
+
+    return () => clearInterval(interval); // Cleanup interval when component unmounts
+  }, []);
+
+  // Filter products based on category and subcategory
   const filteredProducts = products.filter((product) => {
     const categoryMatch = selectedCategory ? product.category === selectedCategory : true;
     const subcategoryMatch = selectedSubcategory ? product.subcategory === selectedSubcategory : true;
@@ -68,7 +35,7 @@ const ProductsPage = () => {
       <div className="container mx-auto px-6 py-12">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Our Products</h1>
 
-        {/* Dropdown för att välja kategori */}
+        {/* Dropdown for category selection */}
         <div className="mb-6">
           <label htmlFor="category" className="block text-lg font-semibold text-gray-700">Select Category</label>
           <select
@@ -77,7 +44,7 @@ const ProductsPage = () => {
             value={selectedCategory}
             onChange={(e) => {
               setSelectedCategory(e.target.value);
-              setSelectedSubcategory(''); // Återställ underkategori när kategori ändras
+              setSelectedSubcategory(''); // Reset subcategory when category changes
             }}
           >
             <option value="">All Categories</option>
@@ -87,7 +54,7 @@ const ProductsPage = () => {
           </select>
         </div>
 
-        {/* Dropdown för att välja underkategori, om en kategori är vald */}
+        {/* Dropdown for subcategory selection */}
         {selectedCategory && (
           <div className="mb-6">
             <label htmlFor="subcategory" className="block text-lg font-semibold text-gray-700">Select Subcategory</label>
@@ -105,14 +72,14 @@ const ProductsPage = () => {
           </div>
         )}
 
-        {/* Visa produktkort baserat på filtrerade produkter */}
+        {/* Display product cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {filteredProducts.map((product, index) => (
             <ProductCard key={index} product={product} onClick={handleCardClick} />
           ))}
         </div>
 
-        {/* Visa detaljer för vald produkt */}
+        {/* Show selected product details */}
         {selectedProduct && (
           <div className="mt-12 bg-white p-8 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold text-gray-800">{selectedProduct.name}</h2>
