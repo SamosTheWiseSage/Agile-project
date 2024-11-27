@@ -1,3 +1,4 @@
+// src/components/Navbar.jsx
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext'; // Import AuthContext
@@ -16,10 +17,11 @@ const Navbar = () => {
       <ul className="flex space-x-6">
         <li><Link to="/" className="hover:bg-gray-700 px-3 py-2 rounded">Home</Link></li>
         <li><Link to="/products" className="hover:bg-gray-700 px-3 py-2 rounded">Products</Link></li>
+        <li><Link to="/second-hand-shop" className="hover:bg-gray-700 px-3 py-2 rounded">Second Hand Shop</Link></li>
         <li><Link to="/about" className="hover:bg-gray-700 px-3 py-2 rounded">About</Link></li>
         <li><Link to="/contact" className="hover:bg-gray-700 px-3 py-2 rounded">Contact</Link></li>
         <li><Link to="/faqs" className="hover:bg-gray-700 px-3 py-2 rounded">FAQs</Link></li>
-        
+
         {/* Conditionally show login/logout and admin link */}
         {user ? (
           <>

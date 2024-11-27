@@ -1,3 +1,4 @@
+// src/App.jsx
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './components/Home';
@@ -7,6 +8,7 @@ import ProductsPage from './components/ProductsPage';
 import About from './components/About';
 import LoginPage from './components/LoginPage';
 import AdminPanel from './components/AdminPanel';
+import SecondHandShop from './components/SecondHandShop'; // Import SecondHandShop component
 import { AuthContext } from './context/AuthContext'; // Import AuthContext
 
 const App = () => {
@@ -43,6 +45,12 @@ const App = () => {
         <Route 
           path="/admin" 
           element={<ProtectedRoute element={<AdminPanel />} requiredRole="admin" />} 
+        />
+
+        {/* Second Hand Shop Route */}
+        <Route 
+          path="/second-hand-shop" 
+          element={<SecondHandShop />} // Add the new route for second hand shop
         />
       </Routes>
     </Router>
