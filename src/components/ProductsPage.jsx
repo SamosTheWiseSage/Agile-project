@@ -2,48 +2,61 @@ import React, { useState } from 'react';
 import ProductCard from './ProductCard';
 import Navbar from './Navbar';
 
-// Uppdaterad produktdata med kategorier
+// Uppdaterad produktdata med kategorier och underkategorier
 const products = [
   {
     name: 'Urban Pulse',
     description: 'Stylish urban wear to elevate your street look!',
     price: 'SEK 599.99',
     image: 'card11.jfif',
-    category: 'Tröjor', // Lägg till kategori
+    category: 'Tröjor', // Kategori
+    subcategory: 'Sweatshirt', // Underkategori
   },
   {
     name: 'StreetLab',
     description: 'Perfect for the modern, street-savvy fashionista.',
     price: 'SEK 499.99',
     image: 'card12.jpg',
-    category: 'Byxor', // Lägg till kategori
+    category: 'Byxor',
+    subcategory: 'Jeans', // Underkategori
   },
   {
     name: 'Vibe Theory',
     description: 'Dive into the vibes of your true self with unique designs.',
     price: 'SEK 499.00',
     image: 'card13.jpg',
-    category: 'Skor', // Lägg till kategori
+    category: 'Skor',
+    subcategory: 'Sneakers', // Underkategori
   },
   {
     name: 'Babatunde',
     description: 'Dive into the vibes of your true self with unique designs.',
     price: 'SEK 699.00',
     image: 'card13.jpg',
-    category: 'Jackor', // Lägg till kategori
+    category: 'Jackor',
+    subcategory: 'Bomber Jacket', // Underkategori
   },
 ];
 
+// Kategorier och underkategorier
+const categories = {
+  'Tröjor': ['Sweatshirt', 'T-shirt', 'Hoodie'],
+  'Byxor': ['Jeans', 'Sweatpants', 'Shorts'],
+  'Skor': ['Sneakers', 'Boots', 'Sandals'],
+  'Jackor': ['Bomber Jacket', 'Blazer', 'Parka'],
+};
+
 const ProductsPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState(''); // State för vald kategori
-  const [selectedProduct, setSelectedProduct] = useState(null); // State för vald produkt
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedSubcategory, setSelectedSubcategory] = useState('');
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const categories = ['Tröjor', 'Byxor', 'Skor', 'Jackor']; // Kategorier att välja mellan
-
-  // Filtrera produkter baserat på vald kategori
-  const filteredProducts = selectedCategory
-    ? products.filter(product => product.category === selectedCategory)
-    : products;
+  // Filtrera produkter baserat på kategori och underkategori
+  const filteredProducts = products.filter((product) => {
+    const categoryMatch = selectedCategory ? product.category === selectedCategory : true;
+    const subcategoryMatch = selectedSubcategory ? product.subcategory === selectedSubcategory : true;
+    return categoryMatch && subcategoryMatch;
+  });
 
   const handleCardClick = (product) => {
     setSelectedProduct(product);
@@ -62,16 +75,37 @@ const ProductsPage = () => {
             id="category"
             className="mt-2 p-2 w-full border border-gray-300 rounded-md"
             value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
+            onChange={(e) => {
+              setSelectedCategory(e.target.value);
+              setSelectedSubcategory(''); // Återställ underkategori när kategori ändras
+            }}
           >
             <option value="">All Categories</option>
-            {categories.map((category, index) => (
+            {Object.keys(categories).map((category, index) => (
               <option key={index} value={category}>{category}</option>
             ))}
           </select>
         </div>
 
-        {/* Visa produktkort baserat på vald kategori */}
+        {/* Dropdown för att välja underkategori, om en kategori är vald */}
+        {selectedCategory && (
+          <div className="mb-6">
+            <label htmlFor="subcategory" className="block text-lg font-semibold text-gray-700">Select Subcategory</label>
+            <select
+              id="subcategory"
+              className="mt-2 p-2 w-full border border-gray-300 rounded-md"
+              value={selectedSubcategory}
+              onChange={(e) => setSelectedSubcategory(e.target.value)}
+            >
+              <option value="">All {selectedCategory}</option>
+              {categories[selectedCategory].map((subcategory, index) => (
+                <option key={index} value={subcategory}>{subcategory}</option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {/* Visa produktkort baserat på filtrerade produkter */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {filteredProducts.map((product, index) => (
             <ProductCard key={index} product={product} onClick={handleCardClick} />
