@@ -1,46 +1,42 @@
 // src/data/mockDatabase.js
 
-const loadDatabase = () => {
-    // Load users and products from localStorage, or set default values if not found
-    const users = JSON.parse(localStorage.getItem('users')) || [
-      { id: 1, username: 'admin', password: 'admin123', role: 'admin' },
-      { id: 2, username: 'user1', password: 'user123', role: 'user' },
-    ];
-  
-    const products = JSON.parse(localStorage.getItem('products')) || [
-      { id: 1, name: 'T-Shirt', imageUrl: '/images/tshirt.jpg' },
-      { id: 2, name: 'Hoodie', imageUrl: '/images/hoodie.jpg' },
-    ];
-  
-    return { users, products };
+let database = {
+    users: [
+      { username: 'admin', password: 'admin123', role: 'admin' },
+      { username: 'user1', password: 'user123', role: 'user' }
+    ],
+    products: [
+      { id: 1, name: 'Product 1', imageUrl: 'product1.jpg' },
+      { id: 2, name: 'Product 2', imageUrl: 'product2.jpg' }
+    ]
   };
   
-  const saveDatabase = (database) => {
-    // Store users and products in localStorage
-    localStorage.setItem('users', JSON.stringify(database.users));
-    localStorage.setItem('products', JSON.stringify(database.products));
+  // Function to load the mock database
+  export const loadDatabase = () => {
+    return database;
   };
   
-  const addNewUser = (newUser) => {
-    const database = loadDatabase();
-    database.users.push(newUser);
-    saveDatabase(database);
+  // Function to save the mock database (this example doesn't do anything with persistence, it's just in memory)
+  export const saveDatabase = (newDatabase) => {
+    database = newDatabase;
   };
   
-  const updateProduct = (updatedProduct) => {
-    const database = loadDatabase();
-    const updatedProducts = database.products.map((product) =>
-      product.id === updatedProduct.id ? updatedProduct : product
-    );
-    database.products = updatedProducts;
-    saveDatabase(database);
+  // Function to authenticate the user
+  export const authenticateUser = (username, password) => {
+    return database.users.find(user => user.username === username && user.password === password);
   };
   
-  const addNewProduct = (newProduct) => {
-    const database = loadDatabase();
-    database.products.push(newProduct);
-    saveDatabase(database);
+  // Function to get all products
+  export const getProducts = () => {
+    return database.products;
   };
   
-  export { loadDatabase, saveDatabase, addNewUser, updateProduct, addNewProduct };
+  // Function to update a product
+  export const updateProduct = (updatedProduct) => {
+    const index = database.products.findIndex(product => product.id === updatedProduct.id);
+    if (index !== -1) {
+      database.products[index] = updatedProduct;
+      saveDatabase(database);
+    }
+  };
   

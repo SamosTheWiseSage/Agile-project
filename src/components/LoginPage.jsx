@@ -1,81 +1,57 @@
-import React, { useState } from 'react';
-import Layout from './Layout';
-import { loadDatabase } from '../data/mockDatabase'; // Import the mockDatabase to manage users
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../context/AuthContext'; // Import AuthContext
+import { useNavigate } from 'react-router-dom'; // For navigation
 
-const Login = () => {
-  // State to manage form inputs and login error
+const LoginPage = () => {
+  const { login } = useContext(AuthContext); // Access login function from AuthContext
+  const navigate = useNavigate();
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const { users } = loadDatabase();
-    
-    // Find user in the mock database
-    const user = users.find(
-      (user) => user.username === username && user.password === password
-    );
+    login(username, password); // Call the login function
 
-    if (user) {
-      // User found, check role and handle login
-      if (user.role === 'admin') {
-        alert('Welcome, Admin!');
-        // Redirect to admin dashboard or handle admin-specific logic
-      } else {
-        alert('Welcome, User!');
-        // Redirect to regular user dashboard or handle user-specific logic
-      }
-    } else {
-      setErrorMessage('Invalid credentials, please try again.');
+    // If login is successful, navigate to the home page
+    if (username && password) {
+      navigate('/'); // Redirect to home page after login
     }
   };
 
   return (
-    <Layout>
-      <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg mt-12">
-        <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
-        <form onSubmit={handleLogin}>
-          <div className="mb-4">
-            <label htmlFor="username" className="block text-lg font-medium text-gray-700">
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full p-3 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <div className="mb-6">
-            <label htmlFor="password" className="block text-lg font-medium text-gray-700">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          {errorMessage && (
-            <p className="text-red-500 text-sm text-center mb-4">{errorMessage}</p>
-          )}
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
-          >
-            Login
-          </button>
-        </form>
-      </div>
-    </Layout>
+    <div className="max-w-md mx-auto mt-12 p-8 bg-white rounded-lg shadow-md">
+      <h2 className="text-3xl text-center font-semibold text-gray-800 mb-6">Login</h2>
+      <form onSubmit={handleLogin}>
+        <div className="mb-4">
+          <label htmlFor="username" className="block text-sm font-semibold text-gray-700">Username</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="mt-2 p-2 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+        <div className="mb-6">
+          <label htmlFor="password" className="block text-sm font-semibold text-gray-700">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="mt-2 p-2 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+        >
+          Login
+        </button>
+      </form>
+    </div>
   );
 };
 
-export default Login;
-
+export default LoginPage;
