@@ -1,9 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom'; // <-- Add this import
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { getProducts, updateProduct } from '../data/mockDatabase'; // Import mock DB functions
-import { useNavigate } from 'react-router-dom';
-import Navbar from './Navbar'; // Import the shared Navbar component
+import { getProducts, updateProduct } from '../data/mockDatabase';
+import Navbar from './Navbar';
 
 const AdminPanel = () => {
   const { role } = useContext(AuthContext);
@@ -16,12 +15,15 @@ const AdminPanel = () => {
 
   const [products, setProducts] = useState(getProducts());
 
-  const handleEditProduct = (id, name, imageUrl) => {
+  const handleEditProduct = (id, name, imageUrl, category, description) => {
+    // Prompt user for new product information
     const newName = prompt('Edit product name:', name);
     const newImageUrl = prompt('Edit product image URL:', imageUrl);
+    const newCategory = prompt('Edit product category:', category);
+    const newDescription = prompt('Edit product description:', description);
 
-    if (newName && newImageUrl) {
-      const updatedProduct = { id, name: newName, imageUrl: newImageUrl };
+    if (newName && newImageUrl && newCategory && newDescription) {
+      const updatedProduct = { id, name: newName, imageUrl: newImageUrl, category: newCategory, description: newDescription };
       updateProduct(updatedProduct); // Update the product in the database
       setProducts(getProducts()); // Refresh the products list to reflect changes
     }
@@ -48,7 +50,7 @@ const AdminPanel = () => {
                   <p className="text-lg">{product.name}</p>
                 </div>
                 <button
-                  onClick={() => handleEditProduct(product.id, product.name, product.imageUrl)}
+                  onClick={() => handleEditProduct(product.id, product.name, product.imageUrl, product.category, product.description)}
                   className="py-1 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none"
                 >
                   Edit
@@ -73,4 +75,3 @@ const AdminPanel = () => {
 };
 
 export default AdminPanel;
-

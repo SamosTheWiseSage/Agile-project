@@ -1,4 +1,4 @@
-// src/App.jsx
+
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './components/Home';
@@ -12,7 +12,7 @@ import SecondHandShop from './components/SecondHandShop'; // Import SecondHandSh
 import { AuthContext } from './context/AuthContext'; // Import AuthContext
 
 const App = () => {
-  const { user, login, logout, isAuthenticated } = useContext(AuthContext); // Access user state and authentication functions
+  const { user, isAuthenticated } = useContext(AuthContext); // Access user state and authentication functions
 
   // Function to protect admin routes
   const ProtectedRoute = ({ element, requiredRole }) => {
@@ -23,6 +23,7 @@ const App = () => {
     if (requiredRole === 'admin' && (!user || user.role !== 'admin')) {
       return <Navigate to="/" />; // Redirect to home if not admin
     }
+
     return element;
   };
 
@@ -34,13 +35,10 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/faqs" element={<FAQs />} />
         <Route path="/about" element={<About />} />
-        
+
         {/* Login Route */}
-        <Route 
-          path="/login" 
-          element={<LoginPage />} // Directly using LoginPage (handled by AuthContext)
-        />
-        
+        <Route path="/login" element={<LoginPage />} />
+
         {/* Admin Page Route - Protected */}
         <Route 
           path="/admin" 
@@ -50,7 +48,7 @@ const App = () => {
         {/* Second Hand Shop Route */}
         <Route 
           path="/second-hand-shop" 
-          element={<SecondHandShop />} // Add the new route for second hand shop
+          element={<SecondHandShop />} 
         />
       </Routes>
     </Router>

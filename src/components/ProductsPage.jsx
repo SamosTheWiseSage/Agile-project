@@ -3,11 +3,18 @@ import ProductCard from './ProductCard';
 import Navbar from './Navbar';
 import { getProducts } from '../data/mockDatabase'; // Import the DB function
 
+const categories = {
+  Jackor: ['Hehehhe'],
+  Tröjor: ['Hoodie', 'ee'],
+  Byxor: ['ByxorTest1'],
+  Skor: ['stest', 'stest2'],
+};
+
 const ProductsPage = () => {
   const [products, setProducts] = useState(getProducts());
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null); // Track the selected product
 
   // Use useEffect to re-fetch products when the component mounts or when products are updated
   useEffect(() => {
@@ -25,68 +32,86 @@ const ProductsPage = () => {
     return categoryMatch && subcategoryMatch;
   });
 
-  const handleCardClick = (product) => {
-    setSelectedProduct(product);
+  // Handle category change: Reset selected product
+  const handleCategoryChange = (event) => {
+    const category = event.target.value;
+    setSelectedCategory(category);
+    setSelectedSubcategory(''); // Reset subcategory when category changes
+    setSelectedProduct(null); // Close description when changing category
+  };
+
+  // Handle subcategory change: Reset selected product
+  const handleSubcategoryChange = (event) => {
+    const subcategory = event.target.value;
+    setSelectedSubcategory(subcategory);
+    setSelectedProduct(null); // Close description when changing subcategory
+  };
+
+  // Toggle product description
+  const handleProductClick = (product) => {
+    if (selectedProduct && selectedProduct.id === product.id) {
+      setSelectedProduct(null); // Close description if the same product is clicked
+    } else {
+      setSelectedProduct(product); // Open description for the clicked product
+    }
   };
 
   return (
     <div>
       <Navbar />
-      <div className="container mx-auto px-6 py-12">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Our Products</h1>
+      {/* Category selection dropdown */}
+      <div className="text-center mt-8">
+        <h3 className="text-2xl font-semibold text-gray-800">Shop by Category</h3>
+        <select
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+          className="mt-4 p-2 border rounded"
+        >
+          <option value="">Select a Category</option>
+          {Object.keys(categories).map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        {/* Dropdown for category selection */}
-        <div className="mb-6">
-          <label htmlFor="category" className="block text-lg font-semibold text-gray-700">Select Category</label>
+      {/* Subcategory selection dropdown */}
+      {selectedCategory && (
+        <div className="text-center mt-8">
+          <h4 className="text-xl font-semibold text-gray-800">Shop by Subcategory</h4>
           <select
-            id="category"
-            className="mt-2 p-2 w-full border border-gray-300 rounded-md"
-            value={selectedCategory}
-            onChange={(e) => {
-              setSelectedCategory(e.target.value);
-              setSelectedSubcategory(''); // Reset subcategory when category changes
-            }}
+            value={selectedSubcategory}
+            onChange={handleSubcategoryChange}
+            className="mt-4 p-2 border rounded"
           >
-            <option value="">All Categories</option>
-            {Object.keys(categories).map((category, index) => (
-              <option key={index} value={category}>{category}</option>
+            <option value="">Select a Subcategory</option>
+            {categories[selectedCategory].map((subcategory) => (
+              <option key={subcategory} value={subcategory}>
+                {subcategory}
+              </option>
             ))}
           </select>
         </div>
+      )}
 
-        {/* Dropdown for subcategory selection */}
-        {selectedCategory && (
-          <div className="mb-6">
-            <label htmlFor="subcategory" className="block text-lg font-semibold text-gray-700">Select Subcategory</label>
-            <select
-              id="subcategory"
-              className="mt-2 p-2 w-full border border-gray-300 rounded-md"
-              value={selectedSubcategory}
-              onChange={(e) => setSelectedSubcategory(e.target.value)}
-            >
-              <option value="">All {selectedCategory}</option>
-              {categories[selectedCategory].map((subcategory, index) => (
-                <option key={index} value={subcategory}>{subcategory}</option>
-              ))}
-            </select>
-          </div>
-        )}
-
-        {/* Display product cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {filteredProducts.map((product, index) => (
-            <ProductCard key={index} product={product} onClick={handleCardClick} />
+      {/* Display filtered products */}
+      <div className="text-center mt-12">
+        <h3 className="text-2xl font-semibold text-gray-800">Latest Products</h3>
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProducts.map((product) => (
+            <div key={product.id}>
+              <ProductCard product={product} onClick={() => handleProductClick(product)} />
+              {/* Product description shown below the product card when selected */}
+              {selectedProduct && selectedProduct.id === product.id && (
+                <div className="mt-4 p-4 border rounded bg-gray-100">
+                  <h4 className="text-lg font-bold">Product Description</h4>
+                  <p className="text-md">{product.description}</p>
+                </div>
+              )}
+            </div>
           ))}
         </div>
-
-        {/* Show selected product details */}
-        {selectedProduct && (
-          <div className="mt-12 bg-white p-8 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-semibold text-gray-800">{selectedProduct.name}</h2>
-            <p className="text-lg text-gray-600 mt-4">{selectedProduct.description}</p>
-            <p className="text-xl font-semibold text-gray-800 mt-4">{selectedProduct.price}</p>
-          </div>
-        )}
       </div>
     </div>
   );

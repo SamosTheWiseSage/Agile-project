@@ -11,6 +11,13 @@ let database = {
   ]
 };
 
+const products = [
+  // Example product data
+  { id: 1, name: 'Product 1', imageUrl: 'product1.jpg', category: 'Jackor', subcategory: 'Hehehhe',description: 'Description of product 1' },
+  { id: 2, name: 'Product 2', imageUrl: 'product2.jpg', category: 'Tröjor', subcategory: 'Hoodie',description: 'Description of product 2' },
+];
+
+
 // Function to load the mock database
 export const loadDatabase = () => {
   return database;
@@ -28,14 +35,14 @@ export const authenticateUser = (username, password) => {
 
 // Function to get all products
 export const getProducts = () => {
-  return database.products;
+  return products;
 };
 
 // Function to update a product
 export const updateProduct = (updatedProduct) => {
-  const index = database.products.findIndex(product => product.id === updatedProduct.id);
+  const index = products.findIndex(product => product.id === updatedProduct.id);
   if (index !== -1) {
-    database.products[index] = updatedProduct;
-    saveDatabase(database);
+    // Update the product in the array
+    products[index] = updatedProduct;
   }
 };

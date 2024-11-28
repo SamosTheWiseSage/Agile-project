@@ -1,11 +1,10 @@
-// src/components/ProductCard.jsx
 import React from 'react';
 
 const ProductCard = ({ product, onClick }) => {
   return (
     <div
       className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl cursor-pointer"
-      onClick={() => onClick(product)} // Trigger the click event
+      onClick={() => onClick(product)} // Trigger the click event to show description
     >
       <img
         src={`assets/${product.image}`} // Image path, assuming the image is in assets folder
