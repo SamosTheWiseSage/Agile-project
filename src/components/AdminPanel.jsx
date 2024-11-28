@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { getProducts, updateProduct } from '../data/mockDatabase';
@@ -9,11 +9,12 @@ const AdminPanel = () => {
   const navigate = useNavigate();
 
   // Ensure only admin can access this panel
-  if (role !== 'admin') {
-    navigate('/'); // Redirect if not admin
-  }
+  useEffect(() => {
+ 
+  }, [role, navigate]);
 
   const [products, setProducts] = useState(getProducts());
+  const [history, setHistory] = useState([]); // Track history of changes
 
   const handleEditProduct = (id, name, imageUrl, category, description) => {
     // Prompt user for new product information
@@ -23,8 +24,26 @@ const AdminPanel = () => {
     const newDescription = prompt('Edit product description:', description);
 
     if (newName && newImageUrl && newCategory && newDescription) {
+      // Create a history entry before updating
+      const change = {
+        productId: id,
+        changes: {
+          name: { old: name, new: newName },
+          imageUrl: { old: imageUrl, new: newImageUrl },
+          category: { old: category, new: newCategory },
+          description: { old: description, new: newDescription },
+        },
+        timestamp: new Date().toLocaleString(),
+      };
+
+      // Update the product in the mock database
       const updatedProduct = { id, name: newName, imageUrl: newImageUrl, category: newCategory, description: newDescription };
-      updateProduct(updatedProduct); // Update the product in the database
+      updateProduct(updatedProduct);
+
+      // Log the change to the history after product update
+      setHistory((prevHistory) => [change, ...prevHistory]); // Add new change at the beginning of the history
+
+      // Update the product list to reflect changes
       setProducts(getProducts()); // Refresh the products list to reflect changes
     }
   };
@@ -60,6 +79,30 @@ const AdminPanel = () => {
           </ul>
         </div>
 
+        {/* History Section */}
+        <div className="mt-8 bg-gray-800 p-6 rounded-lg shadow-md">
+          <h3 className="text-xl font-semibold mb-4">History of Changes</h3>
+          {history.length === 0 ? (
+            <p>No changes yet.</p>
+          ) : (
+            <ul className="space-y-4">
+              {history.map((entry, index) => (
+                <li key={index} className="bg-gray-700 p-4 rounded-lg">
+                  <h4 className="font-semibold">Product ID: {entry.productId}</h4>
+                  <p><strong>Timestamp:</strong> {entry.timestamp}</p>
+                  <ul className="mt-2">
+                    {Object.keys(entry.changes).map((key) => (
+                      <li key={key}>
+                        <strong>{key}:</strong> {entry.changes[key].old} → {entry.changes[key].new}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
         {/* Additional Links */}
         <div className="mt-8 text-center">
           <Link
@@ -75,3 +118,4 @@ const AdminPanel = () => {
 };
 
 export default AdminPanel;
+
