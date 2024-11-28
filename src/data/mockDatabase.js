@@ -1,22 +1,19 @@
-// src/data/mockDatabase.js
-
 let database = {
   users: [
     { username: 'admin', password: 'admin123', role: 'admin' },
     { username: 'user1', password: 'user123', role: 'user' }
   ],
   products: [
-    { id: 1, name: 'Product 1', imageUrl: 'product1.jpg' },
-    { id: 2, name: 'Product 2', imageUrl: 'product2.jpg' }
+    { id: 1, name: 'Product 1', imageUrl: 'product1.jpg', category: 'Jackor', subcategory: 'Hehehhe', description: 'Description of product 1' },
+    { id: 2, name: 'Product 2', imageUrl: 'product2.jpg', category: 'Tröjor', subcategory: 'Hoodie', description: 'Description of product 2' },
+  ],
+  categories: [
+    "Tröjor",
+    "Byxor",
+    "Skor",
+    "Jackor"
   ]
 };
-
-const products = [
-  // Example product data
-  { id: 1, name: 'Product 1', imageUrl: 'product1.jpg', category: 'Jackor', subcategory: 'Hehehhe',description: 'Description of product 1' },
-  { id: 2, name: 'Product 2', imageUrl: 'product2.jpg', category: 'Tröjor', subcategory: 'Hoodie',description: 'Description of product 2' },
-];
-
 
 // Function to load the mock database
 export const loadDatabase = () => {
@@ -35,14 +32,58 @@ export const authenticateUser = (username, password) => {
 
 // Function to get all products
 export const getProducts = () => {
-  return products;
+  return database.products;
 };
 
 // Function to update a product
 export const updateProduct = (updatedProduct) => {
-  const index = products.findIndex(product => product.id === updatedProduct.id);
+  const index = database.products.findIndex(product => product.id === updatedProduct.id);
   if (index !== -1) {
     // Update the product in the array
-    products[index] = updatedProduct;
+    database.products[index] = updatedProduct;
   }
+};
+
+// Function to add a new product
+export const addProduct = (newProduct) => {
+  const id = database.products.length + 1; // Generate a new ID for the product
+  const product = {
+    id,
+    imageUrl: newProduct.imageUrl || 'default-product.jpg', // Use default image if not provided
+    name: newProduct.name || '', // Set empty string if no name is provided
+    category: newProduct.category || 'Uncategorized', // Default to 'Uncategorized' if no category is provided
+    subcategory: newProduct.subcategory || '', // Set empty string if no subcategory is provided
+    description: newProduct.description || '', // Set empty string if no description is provided
+  };
+  database.products.push(product); // Add the product to the database
+};
+
+// Function to get all categories
+export const getCategories = () => {
+  return database.categories;
+};
+
+// Function to add a new category
+export const addCategory = (category) => {
+  if (!database.categories.includes(category)) {
+    database.categories.push(category);
+  }
+};
+
+// Example usage for adding a product
+export const exampleAddProduct = () => {
+  const newProduct = {
+    name: 'New Product',
+    category: 'Skor',
+    subcategory: 'New Subcategory',
+    description: 'This is a new product.',
+    // imageUrl tas bort för att använda standardbilden
+  };
+  addProduct(newProduct);
+};
+
+// Example usage for adding a category
+export const exampleAddCategory = () => {
+  const newCategory = 'Accessories';
+  addCategory(newCategory);
 };

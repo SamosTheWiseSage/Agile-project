@@ -1,5 +1,3 @@
-// src/context/AuthContext.jsx
-
 import React, { createContext, useState, useEffect } from 'react';
 import { authenticateUser } from '../data/mockDatabase';  // Import authenticateUser from mockDatabase
 
@@ -38,12 +36,14 @@ const AuthContextProvider = ({ children }) => {
     localStorage.removeItem('user'); // Remove from localStorage on logout
   };
 
+  // Function to check if the user is an admin
+  const isAdmin = user?.role === 'admin'; // Check if the user has an admin role
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, logout, isAdmin }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export default AuthContextProvider; // Ensure it's exported as default
-
+export default AuthContextProvider;
