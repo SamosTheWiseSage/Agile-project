@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import ShoesHome from '/Users/samoswise/IdeaProjects/Agile-project-2/src/Images/ShoesHome.webp';
-import BagHome from '/Users/samoswise/IdeaProjects/Agile-project-2/src/Images/StreetwareBag.webp';
-import JacketHome from '/Users/samoswise/IdeaProjects/Agile-project-2/src/Images/Streetware Jacket.webp';
+import ShoesHome from './Images/ShoesHome.webp';
+import BagHome from './Images/StreetwareBag.webp';
+import JacketHome from './Images/Streetware Jacket.webp';
 // Sample data for the latest products
 const latestProducts = [
   { id: 1, name: 'Skor!!!', image: ShoesHome},
