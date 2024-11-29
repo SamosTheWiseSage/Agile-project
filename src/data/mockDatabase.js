@@ -1,10 +1,11 @@
+import Shoes2 from '/Users/samoswise/IdeaProjects/Agile-project-2/src/Images/shoes2.webp';
 let database = {
   users: [
     { username: 'admin', password: 'admin123', role: 'admin' },
     { username: 'user1', password: 'user123', role: 'user' }
   ],
   products: [
-    { id: 1, name: 'Product 1', imageUrl: 'product1.jpg', category: 'Jackor', subcategory: 'Hehehhe', description: 'Description of product 1' },
+    { id: 1, name: 'Product 1', imageUrl: Shoes2, category: 'Jackor', subcategory: 'Hehehhe', description: 'Description of product 1' },
     { id: 2, name: 'Product 2', imageUrl: 'product2.jpg', category: 'Tröjor', subcategory: 'Hoodie', description: 'Description of product 2' },
   ],
   categories: [
