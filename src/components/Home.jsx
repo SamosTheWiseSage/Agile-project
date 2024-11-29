@@ -33,7 +33,7 @@ const Home = () => {
       <Navbar />
 
       <div className="text-center mt-12">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">Explore Our Exclusive Offerings</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">Cool Fashion</h2>
         <p className="text-gray-600 mt-2 text-lg">Designed to captivate and engage your audience</p>
       </div>
 
@@ -50,7 +50,7 @@ const Home = () => {
 
       {/* Latest Products Section */}
       <div className="text-center mt-12">
-        <h3 className="text-2xl font-semibold text-gray-800">Latest Products</h3>
+        <h3 className="text-2xl font-semibold text-gray-800">Explore Our Latest Products</h3>
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {latestProducts.map((product) => (
             <div
