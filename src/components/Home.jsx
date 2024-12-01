@@ -5,10 +5,11 @@ import Footer from './Footer';
 import ShoesHome from './Images/ShoesHome.webp';
 import BagHome from './Images/StreetwareBag.webp';
 import JacketHome from './Images/Streetware Jacket.webp';
+
 // Sample data for the latest products
 const latestProducts = [
-  { id: 1, name: 'Skor!!!', image: ShoesHome},
-  { id: 2, name: 'Väska!!!', image: BagHome},
+  { id: 1, name: 'Skor!!!', image: ShoesHome },
+  { id: 2, name: 'Väska!!!', image: BagHome },
   { id: 3, name: 'Jacka!!!!', image: JacketHome },
 ];
 
@@ -30,11 +31,11 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       {/* Navbar */}
       <Navbar />
 
-      <div className="text-center mt-12">
+      <div className="text-center mt-12 flex-grow">
         <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">Cool Fashion</h2>
         <p className="text-gray-600 mt-2 text-lg">Designed to captivate and engage your audience</p>
       </div>
