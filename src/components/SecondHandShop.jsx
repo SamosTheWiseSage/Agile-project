@@ -2,15 +2,20 @@
 import React from 'react';
 import Navbar from './Navbar';  // Import Navbar component
 import Footer from './Footer';  
-
+import Stockimg1 from './Images/Streetware Jacket.webp';  
+import Stockimg2 from './Images/StreetwareSecondhandPants.webp';  
+import Stockimg3 from './Images/shoes4.webp';  
+import Stockimg4 from './Images/SeacondhangStreetwareShirt.webp';  
+import Stockimg5 from './Images/StreetwareSeacondHandShoe.webp';  
+import Stockimg6 from './Images/MoclerSeacondHandJacket.webp';  
 // Sample data for second-hand items with images and prices
 const sampleItems = [
-  { id: 1, name: 'Tröja', description: 'Ny tröja inte använd', image: '', price: '150kr' },
-  { id: 2, name: 'Byxor', description: 'Vintage street byxor.', image: '', price: '800kr' },
-  { id: 3, name: 'Skor', description: 'Använda skor fast ser helt nya ut.', image: '', price: '120kr' },
-  { id: 4, name: 'Tröja retro', description: 'Tröja retro från 90 talet.', image: '', price: '250kr' },
-  { id: 5, name: 'Skor jordan', description: 'Jordan 1 mochas knappt använda.', image: '', price: '500kr' },
-  { id: 6, name: 'Jacka Mocler', description: 'Riktig Moncler från kina absolut inte falsk.', image: '', price: '5kr' },
+  { id: 1, name: 'Tröja', description: 'Ny tröja inte använd', image: Stockimg1, price: '150kr' },
+  { id: 2, name: 'Byxor', description: 'Vintage street byxor.', image: Stockimg2, price: '800kr' },
+  { id: 3, name: 'Skor', description: 'Använda skor fast ser helt nya ut.', image: Stockimg3, price: '120kr' },
+  { id: 4, name: 'Tröja retro', description: 'Tröja retro från 90 talet.', image: Stockimg4, price: '250kr' },
+  { id: 5, name: 'Skor jordan', description: 'Jordan 1 mochas knappt använda.', image: Stockimg5, price: '500kr' },
+  { id: 6, name: 'Jacka Mocler', description: 'Riktig Moncler från kina absolut inte falsk.', image: Stockimg6, price: '5kr' },
 ];
 
 // SecondHandShop Component
