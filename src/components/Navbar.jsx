@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext'; // Importera AuthContext
-
+import Logo from "./Images/Logo.png";
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext); // Hämta användare och logout från AuthContext
   const [isOpen, setIsOpen] = useState(false); // State för att hålla reda på om hamburgermenyn är öppen eller stängd
@@ -15,8 +15,8 @@ const Navbar = () => {
     <nav className="bg-gray-800 text-white p-5">
       <div className="flex justify-between items-center">
         {/* Logo */}
-        <div className="logo">
-          <img src="assets/logo.png" alt="My Logo" className="w-24 h-auto" />
+        <div className="Logo">
+          <img src={Logo} alt="My Logo" className="w-24 h-auto" />
         </div>
 
         {/* Hamburgermeny (synlig alltid) */}

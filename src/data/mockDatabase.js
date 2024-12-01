@@ -1,11 +1,13 @@
+import Jacket from '../components/Images/Streetware Jacket.webp';
+import Shirt from '../components/Images/StreetwareShirt.webp';
 let database = {
   users: [
     { username: 'admin', password: 'admin123', role: 'admin' },
     { username: 'user1', password: 'user123', role: 'user' }
   ],
   products: [
-    { id: 1, name: 'Product 1', imageUrl: 'product1.jpg', category: 'Jackor', subcategory: 'Hehehhe', description: 'Description of product 1' },
-    { id: 2, name: 'Product 2', imageUrl: 'product2.jpg', category: 'Tröjor', subcategory: 'Hoodie', description: 'Description of product 2' },
+    { id: 1, name: 'Product 1', imageUrl: Jacket, category: 'Jackor', subcategory: 'Hehehhe', description: 'Description of product 1' },
+    { id: 2, name: 'Product 2', imageUrl: Shirt, category: 'Tröjor', subcategory: 'Hoodie', description: 'Description of product 2' },
   ],
   categories: [
     "Tröjor",
