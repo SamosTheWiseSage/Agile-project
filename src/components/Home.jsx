@@ -36,7 +36,8 @@ const Home = () => {
       <Navbar />
 
       <div className="text-center mt-12 flex-grow">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">Cool Fashion</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">Cool Fashion<br>
+        </br> Make a Statment Out of Yourself</h2>
         <p className="text-gray-600 mt-2 text-lg">Designed to captivate and engage your audience</p>
       </div>
 
